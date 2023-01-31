@@ -39,7 +39,7 @@ $(function () {
     function initTable() {
         $.ajax({
             method: 'GET',
-            url: '/my/article/list',
+            url: '/my/article/cates',
             data: q,
             success: function (res) {
                 // console.log(res);
@@ -80,8 +80,17 @@ $(function () {
         var cate_id = $('[name=cate_id]').val()
         var state = $('[name=state]').val()
         // 为查询参数对象 q 中对应的属性赋值
-        q.cate_id = cate_id
-        q.state = state
+        if (cate_id) {
+            q.cate_id = cate_id
+        } else {
+            delete q.cate_id
+        }
+
+        if (state) {
+            q.state = state
+        } else {
+            delete q.state
+        }
         // 根据最新的筛选条件，重新渲染表格的数据
         initTable()
     })
